@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'relationship_app',
 ]
 
+LOGIN_REDIRECT_URL = '/relationship_app/books/'
+LOGOUT_REDIRECT_URL = '/relationship_app/login/'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

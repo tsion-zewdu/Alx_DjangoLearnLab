@@ -1,7 +1,19 @@
-<h1>Edit Book</h1>
-<form method="post">
-    {% csrf_token %}
-    <input name="title" value="{{ book.title }}">
-    <input name="publication_year" value="{{ book.publication_year }}">
-    <button type="submit">Save</button>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Book</title>
+</head>
+<body>
+    <h1>Edit Book</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label>Title:</label><br>
+        <input type="text" name="title" value="{{ book.title }}"><br><br>
+
+        <label>Publication Year:</label><br>
+        <input type="number" name="publication_year" value="{{ book.publication_year }}"><br><br>
+
+        <button type="submit">Update Book</button>
+    </form>
+</body>
+</html>
