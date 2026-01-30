@@ -7,7 +7,6 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-
 # Function-based view to list all books
 def list_books(request):
     books = Book.objects.all()
@@ -21,13 +20,13 @@ class LibraryDetailView(DetailView):
     context_object_name = 'library'
 
 # User Registration
-def register_view(request):
-    if request.method == 'POST':
+def register(request):
+    if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('list_books')  
+            return redirect('list_books')
     else:
         form = UserCreationForm()
     return render(request, 'relationship_app/register.html', {'form': form})
