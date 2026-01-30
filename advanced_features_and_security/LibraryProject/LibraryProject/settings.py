@@ -125,3 +125,4 @@ LOGOUT_REDIRECT_URL = '/relationship_app/login/'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
+
