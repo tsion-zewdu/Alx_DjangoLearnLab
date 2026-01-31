@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% block content %}
 <h2>Books List</h2>
 <table>
@@ -23,5 +24,6 @@
         {% endfor %}
     </tbody>
 </table>
-<a href="{% url 'book_create' %}">Add New Book</a>
+
+<a href="{% url 'form_example_view' %}">Add New Book</a>
 {% endblock %}

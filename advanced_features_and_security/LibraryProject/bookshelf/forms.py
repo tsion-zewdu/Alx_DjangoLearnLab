@@ -10,3 +10,8 @@ class BookForm(forms.ModelForm):
             'author': forms.Select(attrs={'class': 'form-control'}),
             'publication_year': forms.NumberInput(attrs={'class': 'form-control'}),
         }
+
+class ExampleForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = ['title', 'author', 'publication_year']
