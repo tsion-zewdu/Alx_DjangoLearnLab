@@ -1,17 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Books</title>
-</head>
-<body>
-    <h1>Book List</h1>
-
-    <ul>
+{% extends "base.html" %}
+{% block content %}
+<h2>Books List</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Year</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for book in books %}
-            <li>{{ book.title }} - {{ book.author }}</li>
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author.name }}</td>
+            <td>{{ book.publication_year }}</td>
+        </tr>
         {% empty %}
-            <li>No books available</li>
+        <tr>
+            <td colspan="3">No books available</td>
+        </tr>
         {% endfor %}
-    </ul>
-</body>
-</html>
+    </tbody>
+</table>
+<a href="{% url 'book_create' %}">Add New Book</a>
+{% endblock %}
