@@ -26,6 +26,8 @@ SECRET_KEY = 'django-insecure-5uc4%znj4lk65(2_lgs5azr0i2nc@&80t%74m^bckz89uqmb89
 # Set DEBUG to False in production
 DEBUG = False
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # Redirect all HTTP requests to HTTPS
 SECURE_SSL_REDIRECT = True  # ensures all traffic uses HTTPS
 
