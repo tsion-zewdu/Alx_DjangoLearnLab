@@ -4,6 +4,7 @@ from .models import Book
 from .serializers import BookSerializer
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
+from django_filters import rest_framework as filters
 
 
 # READ – anyone can access, but authenticated can also write if needed
@@ -35,20 +36,19 @@ class BookDeleteView(generics.DestroyAPIView):
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticated]
 
-# Book list view with filtering, search, and ordering
 class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     # DRF filter backends
-    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filter_backends = [filters.DjangoFilterBackend, SearchFilter, OrderingFilter]
 
     # Fields allowed for filtering
     filterset_fields = ['title', 'author', 'publication_year']
 
     # Fields allowed for search
-    search_fields = ['title', 'author__name']  
+    search_fields = ['title', 'author']  
 
     # Fields allowed for ordering
     ordering_fields = ['title', 'publication_year']
