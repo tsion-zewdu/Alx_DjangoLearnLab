@@ -8,7 +8,11 @@ from .views import (
     PostUpdateView,
     PostDeleteView,
 )
-from .views import add_comment, update_comment, delete_comment
+from .views import (
+    CommentCreateView,
+    CommentUpdateView,
+    CommentDeleteView,
+)
 
 urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='blog/login.html'), name='login'),

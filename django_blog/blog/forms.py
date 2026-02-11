@@ -25,6 +25,12 @@ class PostForm(forms.ModelForm):
         fields = ['title', 'content']
 
 class CommentForm(forms.ModelForm):
+    content = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 4}),
+        min_length=2,
+        max_length=1000
+    )
+
     class Meta:
         model = Comment
         fields = ['content']
