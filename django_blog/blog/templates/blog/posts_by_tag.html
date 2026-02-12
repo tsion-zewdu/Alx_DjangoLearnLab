@@ -1,13 +1,16 @@
-{% extends 'blog/base.html' %}
+{% extends "blog/base.html" %}
+
 {% block content %}
-<h2>Posts tagged: {{ view.kwargs.tag_name }}</h2>
-{% if object_list %}
-    <ul>
-    {% for post in object_list %}
-        <li><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></li>
+<h2>Posts with tag "{{ view.kwargs.tag_name }}"</h2>
+{% if posts %}
+  <ul>
+    {% for post in posts %}
+      <li>
+        <a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a>
+      </li>
     {% endfor %}
-    </ul>
+  </ul>
 {% else %}
-    <p>No posts with this tag.</p>
+  <p>No posts with this tag.</p>
 {% endif %}
 {% endblock %}

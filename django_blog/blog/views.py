@@ -179,6 +179,7 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class SearchResultsView(ListView):
     model = Post
     template_name = 'blog/search_results.html'
+    context_object_name = 'posts'
 
     def get_queryset(self):
         query = self.request.GET.get('q')
@@ -193,7 +194,9 @@ class SearchResultsView(ListView):
 class TagPostListView(ListView):
     model = Post
     template_name = 'blog/posts_by_tag.html'
+    context_object_name = 'posts'
 
     def get_queryset(self):
-        tag = self.kwargs.get('tag_name')
-        return Post.objects.filter(tags__name__iexact=tag)
+        tag_name = self.kwargs.get('tag_name')
+        return Post.objects.filter(tags__name__iexact=tag_name)
+
