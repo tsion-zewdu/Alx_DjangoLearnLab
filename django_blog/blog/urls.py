@@ -10,9 +10,11 @@ from .views import (
     CommentCreateView,
     CommentUpdateView,
     CommentDeleteView,
-    TagPostListView,
+    TagPostListView,  
+    PostByTagListView,
     SearchResultsView,
 )
+
 from .views import SearchResultsView
 
 urlpatterns = [
@@ -35,7 +37,8 @@ urlpatterns = [
     # Search
     path('search/', SearchResultsView.as_view(), name='search-results'),
 
-    path('tags/<str:tag_name>/', views.TagPostListView.as_view(), name='posts-by-tag'),
+    # Tags
+    path('tags/<slug:tag_slug>/', PostByTagListView.as_view(), name='posts-by-tag'),
 ]
 
 

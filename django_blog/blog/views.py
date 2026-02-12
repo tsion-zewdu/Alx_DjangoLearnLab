@@ -19,6 +19,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.views.generic import ListView
 from django.db.models import Q
+from .models import Tag
 
 def register(request):
     if request.method == 'POST':
@@ -200,3 +201,11 @@ class TagPostListView(ListView):
         tag_name = self.kwargs.get('tag_name')
         return Post.objects.filter(tags__name__iexact=tag_name)
 
+class PostByTagListView(ListView):
+    model = Post
+    template_name = 'blog/posts_by_tag.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        tag_slug = self.kwargs.get('tag_slug')
+        return Post.objects.filter(tags__slug=tag_slug)
