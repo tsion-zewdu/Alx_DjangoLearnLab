@@ -11,6 +11,7 @@ from .views import (
     CommentUpdateView,
     CommentDeleteView,
 )
+from .views import PostSearchListView
 
 urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='blog/login.html'), name='login'),
@@ -28,6 +29,11 @@ urlpatterns = [
     path('post/<int:pk>/comments/new/', CommentCreateView.as_view(), name='comment-create'),
     path('comment/<int:pk>/update/', CommentUpdateView.as_view(), name='comment-update'),
     path('comment/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
+    # Search
+    path('search/', PostSearchListView.as_view(), name='post-search'),
+
+    # Posts by tag
+    path('tags/<slug:tag_slug>/', PostListView.as_view(), name='posts-by-tag'),
 ]
 
 

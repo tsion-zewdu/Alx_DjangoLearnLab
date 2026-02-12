@@ -17,7 +17,8 @@ from .models import Comment
 from .forms import CommentForm
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
-
+from django.views.generic import ListView
+from django.db.models import Q
 
 def register(request):
     if request.method == 'POST':
@@ -174,3 +175,18 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def get_success_url(self):
         return self.object.post.get_absolute_url()
+
+class PostSearchListView(ListView):
+    model = Post
+    template_name = 'blog/search_results.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            return Post.objects.filter(
+                Q(title__icontains=query) |
+                Q(content__icontains=query) |
+                Q(tags__name__icontains=query)
+            ).distinct()
+        return Post.objects.none()
