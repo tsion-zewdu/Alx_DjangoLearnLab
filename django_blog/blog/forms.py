@@ -24,7 +24,7 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ['title', 'content']
 
-class CommentForm(forms.ModelForm):
+'''class CommentForm(forms.ModelForm):
     content = forms.CharField(
         widget=forms.Textarea(attrs={'rows': 4}),
         min_length=2,
@@ -33,6 +33,14 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
+        fields = ['content']'''
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
         fields = ['content']
+        widgets = {
+            'content': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Write your comment...'})
+        }
 
 
