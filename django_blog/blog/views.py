@@ -176,10 +176,9 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def get_success_url(self):
         return self.object.post.get_absolute_url()
 
-class PostSearchListView(ListView):
+class SearchResultsView(ListView):
     model = Post
     template_name = 'blog/search_results.html'
-    context_object_name = 'posts'
 
     def get_queryset(self):
         query = self.request.GET.get('q')
@@ -190,3 +189,11 @@ class PostSearchListView(ListView):
                 Q(tags__name__icontains=query)
             ).distinct()
         return Post.objects.none()
+
+class TagPostListView(ListView):
+    model = Post
+    template_name = 'blog/posts_by_tag.html'
+
+    def get_queryset(self):
+        tag = self.kwargs.get('tag_name')
+        return Post.objects.filter(tags__name__iexact=tag)

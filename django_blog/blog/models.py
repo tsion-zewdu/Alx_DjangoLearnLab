@@ -10,12 +10,10 @@ class Post(models.Model):
     published_date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     tags = TaggableManager()  
-
+    
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
-        return reverse('post-detail', kwargs={'pk': self.pk})
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
